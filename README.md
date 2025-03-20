@@ -1,7 +1,7 @@
-# **ProjectFlow**  
+# **TaskHive**  
 _Plataforma de Gestión de Proyectos y Tareas_
 
-**ProjectFlow** es una aplicación web diseñada para facilitar la gestión de proyectos y tareas dentro de equipos de trabajo. El objetivo de esta plataforma es proporcionar una herramienta eficiente y fácil de usar para organizar proyectos, asignar tareas, gestionar archivos y permitir una colaboración fluida entre los miembros del equipo.
+**TaskHive** es una aplicación web diseñada para facilitar la gestión de proyectos y tareas dentro de equipos de trabajo. El objetivo de esta plataforma es proporcionar una herramienta eficiente y fácil de usar para organizar proyectos, asignar tareas, gestionar archivos y permitir una colaboración fluida entre los miembros del equipo.
 
 Este proyecto utiliza tecnologías como **PHP** para el backend, **MySQL** para la base de datos, y **Docker** para contenerización de los servicios. Además, implementa **LDAP** para la autenticación de usuarios, lo que permite una gestión centralizada y segura de las credenciales.
 
