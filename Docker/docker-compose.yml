@@ -1,0 +1,57 @@
+services:
+  web:
+    image: php:7.4-apache
+    container_name: servidor_apache
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/var/www
+      - ./confApache:/etc/apache2
+    networks:
+      red_TaskHive:
+        ipv4_address: 192.168.0.10
+  
+  ftp:
+    image: stilliard/pure-ftpd
+    container_name: servidor_ftp
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    volumes:
+      - "/folder_on_disk/data:/home/username"
+      - "/folder_on_disk/passwd:/etc/servidor_ftp/passwd"
+    environment:
+      PUBLICHOST: "localhost"
+      FTP_USER_NAME: user
+      FTP_USER_PASS: ftpasasa1221
+      FTP_USER_HOME: /home/username
+    networks:
+      red_TaskHive:
+        ipv4_address: 192.168.0.11
+    restart: always
+
+  db:
+    image: mysql:5.7
+    restart: always
+    container_name: base_datos
+    enviroment:
+      MYSQL_DATABASE: "rigemdb"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: ""
+      MYSQL_ROOT_PASSWORD: ""
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      red_TaskHive:
+        ipv4_address: 192.168.0.12
+  networks:
+    red_TaskHive:
+      driver: bridge
+      ipam:
+        driver: default
+        config:
+          - subnet: 192.168.0.0/24
