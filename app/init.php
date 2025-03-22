@@ -1,2 +1,4 @@
 <!--init.php-->
-<?php?>
+<?php
+session_start();
+?>
