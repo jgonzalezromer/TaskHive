@@ -10,6 +10,7 @@ services:
       MYSQL_PASSWORD: userpassword
     volumes:
       - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - taskhive_network
 
@@ -23,10 +24,9 @@ services:
       - db
     networks:
       - taskhive_network
-    # Instala el controlador PDO para MySQL al construir el contenedor
     build:
       context: .
-      dockerfile: Dockerfile.php
+      dockerfile: Dockerfile
 
   web:
     image: nginx:latest
@@ -48,3 +48,4 @@ volumes:
 
 networks:
   taskhive_network:
+    driver: bridge
