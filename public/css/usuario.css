@@ -1,18 +1,78 @@
-/* usuario.css */
-.create-task-container {
-    max-width: 600px;
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+/* Contenedor principal */
+.proyecto-container, .create-task-container, .dashboard-container {
+    max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    background: #fff;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.create-task-container h1 {
-    text-align: center;
-    margin-bottom: 20px;
+/* Lista de tareas */
+.tareas-lista {
+    list-style: none;
+    padding: 0;
 }
 
+.tareas-lista li {
+    background: #ecf0f1;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tareas-lista li:hover {
+    background: #d5d8dc;
+}
+
+/* Lista de proyectos */
+.proyectos-lista {
+    list-style: none;
+    padding: 0;
+}
+
+.proyectos-lista li {
+    background: #ecf0f1;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.proyectos-lista li:hover {
+    background: #d5d8dc;
+}
+
+/* Formularios */
 .form-group {
     margin-bottom: 15px;
 }
@@ -21,41 +81,114 @@
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #2c3e50;
 }
 
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.btn-crear-tarea {
-    display: block;
+.form-group input, .form-group textarea {
     width: 100%;
     padding: 10px;
-    background-color: #28a745;
-    color: white;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Botones */
+.btn-crear-tarea, .btn-crear-proyecto {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #3498db;
+    color: #fff;
     border: none;
     border-radius: 4px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 
-.btn-crear-tarea:hover {
-    background-color: #218838;
+.btn-crear-tarea:hover, .btn-crear-proyecto:hover {
+    background: #2980b9;
 }
 
+/* Botones de eliminar */
+.btn-eliminar {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-left: 10px;
+}
+
+.btn-eliminar:hover {
+    background: #c0392b;
+}
+
+/* Enlaces de retroceso */
 .back-link {
-    margin-top: 15px;
+    margin-top: 20px;
     text-align: center;
 }
 
 .back-link a {
-    color: #007bff;
-    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
 }
 
 .back-link a:hover {
-    text-decoration: underline;
+    color: #2980b9;
+}
+
+/* Acciones rápidas */
+.acciones-rapidas {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.acciones-rapidas .btn-crear-tarea {
+    background: #27ae60;
+}
+
+.acciones-rapidas .btn-crear-tarea:hover {
+    background: #219653;
+}
+
+/* Mensajes de error */
+.alert {
+    padding: 10px;
+    background: #e74c3c;
+    color: #fff;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .proyecto-container, .create-task-container, .dashboard-container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .form-group input, .form-group textarea {
+        font-size: 14px;
+    }
+
+    .btn-crear-tarea, .btn-crear-proyecto {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .btn-eliminar {
+        padding: 8px;
+        font-size: 14px;
+    }
 }

@@ -92,7 +92,7 @@ class UsuarioController {
         $tareas = $this->usuarioModel->obtenerTareas($proyecto_id);
 
         // Incluye la vista del proyecto
-        include __DIR__ . '/../Views/usuario/projects.html';
+        include __DIR__ . '/../Views/usuario/projects.php';
     }
 
     /**
@@ -129,6 +129,67 @@ class UsuarioController {
             }
         } else {
             // Si no es POST, mostrar un mensaje de error
+            echo "<script>alert('Método no permitido.'); window.history.back();</script>";
+            exit();
+        }
+    }
+    public function eliminarTarea() {
+        session_start();
+    
+        // Verifica si el usuario está autenticado
+        if (!isset($_SESSION['usuario'])) {
+            header("Location: /index.php");
+            exit();
+        }
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $tarea_id = $_POST['tarea_id'] ?? '';
+            $proyecto_id = $_POST['proyecto_id'] ?? '';
+    
+            if (empty($tarea_id) || empty($proyecto_id)) {
+                echo "<script>alert('ID de la tarea o proyecto no válido.'); window.history.back();</script>";
+                exit();
+            }
+    
+            if ($this->usuarioModel->eliminarTarea($tarea_id)) {
+                // Redirigir a la página del proyecto después de eliminar la tarea
+                header("Location: /index.php?action=verProyecto&id=$proyecto_id");
+                exit();
+            } else {
+                echo "<script>alert('Error al eliminar la tarea.'); window.history.back();</script>";
+                exit();
+            }
+        } else {
+            echo "<script>alert('Método no permitido.'); window.history.back();</script>";
+            exit();
+        }
+    }
+    public function eliminarProyecto() {
+        session_start();
+    
+        // Verifica si el usuario está autenticado
+        if (!isset($_SESSION['usuario'])) {
+            header("Location: /index.php");
+            exit();
+        }
+    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $proyecto_id = $_POST['proyecto_id'] ?? '';
+    
+            if (empty($proyecto_id)) {
+                echo "<script>alert('ID del proyecto no válido.'); window.history.back();</script>";
+                exit();
+            }
+    
+            if ($this->usuarioModel->eliminarProyecto($proyecto_id)) {
+                // Redirigir al dashboard después de eliminar el proyecto
+                header("Location: /index.php?action=dashboard");
+                exit();
+            } else {
+                echo "<script>alert('Error al eliminar el proyecto.'); window.history.back();</script>";
+                exit();
+            }
+        } else {
             echo "<script>alert('Método no permitido.'); window.history.back();</script>";
             exit();
         }

@@ -61,5 +61,25 @@ class UsuarioModel {
 
         return $stmt->execute();
     }
+
+    public function eliminarTarea($tarea_id) {
+        $query = "DELETE FROM tareas WHERE id = :tarea_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':tarea_id', $tarea_id);
+        return $stmt->execute();
+    }
+    public function eliminarProyecto($proyecto_id) {
+        // Primero eliminamos las tareas asociadas al proyecto
+        $query = "DELETE FROM tareas WHERE proyecto_id = :proyecto_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':proyecto_id', $proyecto_id);
+        $stmt->execute();
+    
+        // Luego eliminamos el proyecto
+        $query = "DELETE FROM proyectos WHERE id = :proyecto_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':proyecto_id', $proyecto_id);
+        return $stmt->execute();
+    }
 }
 ?>

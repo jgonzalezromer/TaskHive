@@ -1,3 +1,17 @@
+<?php
+// Iniciar sesión
+session_start();
+
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /index.php");
+    exit();
+}
+
+// Obtener los proyectos del usuario
+$proyectos = $this->usuarioModel->obtenerProyectos($_SESSION['usuario']['id']);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,6 +34,11 @@
                         <h3><?php echo htmlspecialchars($proyecto['nombre']); ?></h3>
                         <p><?php echo htmlspecialchars($proyecto['descripcion']); ?></p>
                         <a href="/index.php?action=verProyecto&id=<?php echo $proyecto['id']; ?>">Ver detalles</a>
+                        <!-- Botón para eliminar el proyecto -->
+                        <form action="/index.php?action=eliminarProyecto" method="POST" style="display: inline;">
+                            <input type="hidden" name="proyecto_id" value="<?php echo $proyecto['id']; ?>">
+                            <button type="submit" class="btn-eliminar">Eliminar</button>
+                        </form>
                     </li>
                 <?php endforeach; ?>
             </ul>
