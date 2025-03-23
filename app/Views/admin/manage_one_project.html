@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Proyecto</title>
+    <link rel="stylesheet" href="../../../public/assets/css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalles del Proyecto</h1>
+
+        <!-- Información del Proyecto -->
+        <div class="project-details">
+            <h2>Proyecto 1</h2>
+            <p><strong>Descripción:</strong> Este proyecto está destinado a mejorar la funcionalidad de la plataforma de gestión de tareas.</p>
+            <p><strong>Fecha de inicio:</strong> 01-03-2025</p>
+            <p><strong>Fecha estimada de finalización:</strong> 01-06-2025</p>
+
+            <h3>Miembros del Proyecto</h3>
+            <ul>
+                <li>Juan Pérez</li>
+                <li>Ana Gómez</li>
+                <li>Carlos Sánchez</li>
+            </ul>
+
+            <h3>Tareas del Proyecto</h3>
+            <div class="tasks-list">
+                <!-- Tarea 1 -->
+                <div class="task-card">
+                    <input type="checkbox" id="task1_project">
+                    <label for="task1_project">Revisar el diseño de la plataforma.</label>
+                </div>
+
+                <!-- Tarea 2 -->
+                <div class="task-card">
+                    <input type="checkbox" id="task2_project">
+                    <label for="task2_project">Implementar la funcionalidad de búsqueda.</label>
+                </div>
+
+                <!-- Tarea 3 -->
+                <div class="task-card">
+                    <input type="checkbox" id="task3_project">
+                    <label for="task3_project">Corregir errores en el sistema de autenticación.</label>
+                </div>
+            </div>
+
+            <!-- Formulario para añadir nueva tarea -->
+            <div class="add-task">
+                <h4>Añadir Nueva Tarea</h4>
+                <form action="submit_task.html" method="post">
+                    <input type="text" name="task-name" placeholder="Nombre de la tarea" required>
+                    <textarea name="task-description" placeholder="Descripción de la tarea" required></textarea>
+                    <button type="submit">Añadir Tarea</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Botón para Volver -->
+        <div class="back-btn">
+            <a href="manage_projects.html" class="back-link">Volver a la gestión de proyectos</a>
+        </div>
+    </div>
+</body>
+</html>

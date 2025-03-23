@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Usuarios</title>
+    <link rel="stylesheet" href="../../../public/assets/css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestionar Usuarios</h1>
+
+        <!-- Tabla de Usuarios -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Juan Pérez</td>
+                    <td>juan@ejemplo.com</td>
+                    <td>Administrador</td>
+                    <td>
+                        <a href="edit_user.html?id=1">Editar</a>
+                        <a href="delete_user.html?id=1" class="delete-link">Eliminar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ana Gómez</td>
+                    <td>ana@ejemplo.com</td>
+                    <td>Miembro</td>
+                    <td>
+                        <a href="edit_user.html?id=2">Editar</a>
+                        <a href="delete_user.html?id=2" class="delete-link">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

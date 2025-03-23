@@ -1,0 +1,33 @@
+<!--register.html-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Register</title>
+        <link rel="stylesheet" href="../../../public/assets/css/auth.css">
+    </head>
+    <body>
+        <div class="register-box">
+            <h1>Registro</h1>
+            <form method="POST"> <!-- El formulario enviará los datos a la ruta /register -->
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required><br><br>
+    
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" id="correo" name="correo" required><br><br>
+    
+                <label for="usuario">Nombre de usuario:</label>
+                <input type="text" id="usuario" name="usuario" required><br><br>
+    
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" required><br><br>
+    
+                <label for="confirmar_contraseña">Confirmar Contraseña:</label>
+                <input type="password" id="confirmar_contraseña" name="confirmar_contraseña" required><br><br>
+    
+                <input type="submit" name="registrar" value="Registrar">
+            </form>
+            <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a></p>
+        </div>
+    </body>
+</html>
