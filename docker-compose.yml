@@ -24,6 +24,7 @@ services:
       - db
     networks:
       - taskhive_network
+    # Instala el controlador PDO para MySQL al construir el contenedor
     build:
       context: .
       dockerfile: Dockerfile
@@ -48,4 +49,3 @@ volumes:
 
 networks:
   taskhive_network:
-    driver: bridge
