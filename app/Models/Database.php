@@ -1,29 +1,27 @@
-<!--Database.php-->
 <?php
-// Función para a conexión coa base de datos
-function Database(){
-    // Credenciais para o inicio de sesion en mysql
-    $servername = DB_HOST;
-    $username = DB_USER;
-    $password = DB_PASS;
-    $database = DB_NAME;
-    $port= DB_PORT;
 
-    // Creamos a conexión con mysql
-    $conn = new mysqli($servername, $username, $password,$database,$port);
+class Database {
+    private $host = 'db';  // Nombre del servicio en docker-compose.yml
+    private $db_name = 'taskhive';
+    private $username = 'taskhive_user';
+    private $password = 'userpassword';
+    private $conn;
 
-    // Comprobar se hai un erro ao conectar 
-    if ($conn->connect_error) { 
-        // Con die detemos o script
-        die("Connection failed: " . $conn->connect_error);
+    public function connect() {
+        $this->conn = null;
+
+        try {
+            $this->conn = new PDO(
+                "mysql:host={$this->host};dbname={$this->db_name}",
+                $this->username,
+                $this->password
+            );
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo "Error de conexión: " . $e->getMessage();
+        }
+
+        return $this->conn;
     }
-
-    return $conn; // Devolvemos a conexión
-}
-
-// Función para cerrar a conexión coa base de datos
-function DesconexionDB($conn){
-    // Cerramos sesion con close()
-    $conn->close();
 }
 ?>

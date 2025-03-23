@@ -3,56 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Proyecto</title>
-    <link rel="stylesheet" href="../../../public/assets/css/usuario.css">
+    <title>Detalles del Proyecto - TaskHive</title>
+    <link rel="stylesheet" href="/css/usuario.css">
 </head>
 <body>
-    <div class="container">
+    <div class="proyecto-container">
         <h1>Detalles del Proyecto</h1>
 
-        <!-- Sección de Proyecto -->
-        <div class="project-details">
-            <h2>Proyecto 1</h2>
-            <p><strong>Descripción:</strong> Este proyecto está destinado a mejorar la funcionalidad de la plataforma de gestión de tareas.</p>
-            <p><strong>Fecha de inicio:</strong> 1 de Marzo de 2025</p>
-            <p><strong>Fecha estimada de finalización:</strong> 1 de Junio de 2025</p>
-
-            <!-- Estado del Proyecto -->
-            <p><strong>Estado:</strong> En Progreso</p>
-
-            <!-- Miembros del Proyecto -->
-            <h3>Miembros del Proyecto</h3>
-            <ul>
-                <li>Juan Pérez</li>
-                <li>Ana Gómez</li>
-                <li>Carlos Sánchez</li>
+        <h2>Tareas</h2>
+        <?php if (empty($tareas)): ?>
+            <p>No hay tareas en este proyecto.</p>
+        <?php else: ?>
+            <ul class="tareas-lista">
+                <?php foreach ($tareas as $tarea): ?>
+                    <li>
+                        <h3><?php echo htmlspecialchars($tarea['nombre']); ?></h3>
+                        <p><?php echo htmlspecialchars($tarea['descripcion']); ?></p>
+                    </li>
+                <?php endforeach; ?>
             </ul>
+        <?php endif; ?>
 
-            <h3>Tareas del Proyecto</h3>
-            <div class="tasks-list">
-                <!-- Task 1 -->
-                <div class="task-card">
-                    <input type="checkbox" id="task1_project">
-                    <label for="task1_project">Revisar el diseño de la plataforma.</label>
-                </div>
-
-                <!-- Task 2 -->
-                <div class="task-card">
-                    <input type="checkbox" id="task2_project">
-                    <label for="task2_project">Implementar la funcionalidad de búsqueda.</label>
-                </div>
-
-                <!-- Task 3 -->
-                <div class="task-card">
-                    <input type="checkbox" id="task3_project">
-                    <label for="task3_project">Corregir errores en el sistema de autenticación.</label>
-                </div>
-            </div>
+        <!-- Enlace para crear una nueva tarea -->
+        <div class="acciones-rapidas">
+            <a href="/proyecto/app/Views/usuario/create_task.html?id=<?php echo $proyecto_id; ?>" class="btn-crear-tarea">Crear nueva tarea</a>
         </div>
 
-        <!-- Botón para Volver -->
-        <div class="back-btn">
-            <a href="dashboard.html" class="back-link">Volver al Dashboard</a>
+        <!-- Enlace para volver al dashboard -->
+        <div class="back-link">
+            <a href="/index.php?action=dashboard">Volver al dashboard</a>
         </div>
     </div>
 </body>

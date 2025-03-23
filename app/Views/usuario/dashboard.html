@@ -1,52 +1,38 @@
-<!-- dashboard.html -->
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="../../../public/assets/css/usuario.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TaskHive</title>
+    <link rel="stylesheet" href="/css/usuario.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Dashboard de Proyectos y Tareas</h1>
-        <div class="projects-container">
-            <div class="projects-header">
-                <h2>Proyectos</h2>
-                <a href="create_project.html" class="btn-create">Crear Proyecto</a>
-            </div>
-            <div class="projects-list">
-                <div class="project-card">
-                    <h3><a href="projects.html">Proyecto 1</a></h3>
-                    <p>Descripción del proyecto 1.</p>
-                    <p><strong>Fecha de inicio:</strong> 01-03-2025</p>
-                    <p><strong>Fecha estimada:</strong> 01-06-2025</p>
-                </div>
-                <div class="project-card">
-                    <h3><a href="projects.html">Proyecto 2</a></h3>
-                    <p>Descripción del proyecto 2.</p>
-                    <p><strong>Fecha de inicio:</strong> 01-04-2025</p>
-                    <p><strong>Fecha estimada:</strong> 01-07-2025</p>
-                </div>
-            </div>
+    <div class="dashboard-container">
+        <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']['nombre']); ?></h1>
+
+        <h2>Tus proyectos</h2>
+        <?php if (empty($proyectos)): ?>
+            <p>No tienes proyectos creados.</p>
+        <?php else: ?>
+            <ul class="proyectos-lista">
+                <?php foreach ($proyectos as $proyecto): ?>
+                    <li>
+                        <h3><?php echo htmlspecialchars($proyecto['nombre']); ?></h3>
+                        <p><?php echo htmlspecialchars($proyecto['descripcion']); ?></p>
+                        <a href="/index.php?action=verProyecto&id=<?php echo $proyecto['id']; ?>">Ver detalles</a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+
+        <!-- Enlace para crear un nuevo proyecto -->
+        <div class="acciones-rapidas">
+            <a href="/index.php?action=crearProyecto" class="btn-crear-proyecto">Crear nuevo proyecto</a>
         </div>
-        <div class="tasks-container">
-            <div class="tasks-header">
-                <h2>Tareas Pendientes</h2>
-            </div>
-            <div class="tasks-list">
-                <div class="task-card">
-                    <input type="checkbox" id="task1">
-                    <label for="task1">Revisar el diseño de la plataforma</label>
-                </div>
-                <div class="task-card">
-                    <input type="checkbox" id="task2">
-                    <label for="task2">Implementar la funcionalidad de búsqueda</label>
-                </div>
-                <div class="task-card">
-                    <input type="checkbox" id="task3">
-                    <label for="task3">Corregir errores en el sistema de autenticación</label>
-                </div>
-            </div>
+
+        <!-- Enlace para cerrar sesión -->
+        <div class="logout-link">
+            <a href="/index.php?action=logout">Cerrar sesión</a>
         </div>
     </div>
 </body>

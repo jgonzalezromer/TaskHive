@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Tarea - TaskHive</title>
+    <link rel="stylesheet" href="/css/usuario.css">
+</head>
+<body>
+    <div class="create-task-container">
+        <h1>Crear Nueva Tarea</h1>
+        <form action="/index.php?action=crearTarea" method="POST">
+            <input type="hidden" name="action" value="crearTarea">
+            <input type="hidden" name="proyecto_id" value="<?php echo $_GET['id']; ?>">
+            
+            <div class="form-group">
+                <label for="nombre">Nombre de la Tarea</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Introduce el nombre de la tarea" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" placeholder="Introduce la descripción de la tarea" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-crear-tarea">Crear Tarea</button>
+        </form>
+
+        <div class="back-link">
+            <a href="/index.php?action=verProyecto&id=<?php echo $_GET['id']; ?>">Volver al proyecto</a>
+        </div>
+    </div>
+</body>
+</html>

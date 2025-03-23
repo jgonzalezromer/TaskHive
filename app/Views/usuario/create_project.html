@@ -1,52 +1,36 @@
 <!DOCTYPE html>
-<html >
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Proyecto</title>
-    <link rel="stylesheet" href="../../../public/assets/css/usuario.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nuevo Proyecto - TaskHive</title>
+    <link rel="stylesheet" href="/css/usuario.css"> <!-- Asegúrate de que la ruta del CSS sea correcta -->
 </head>
 <body>
-    <div class="container">
+    <div class="create-project-container">
         <h1>Crear Nuevo Proyecto</h1>
-        <form action="submit_project" method="post" class="project-form">
+
+        <!-- Formulario para crear un nuevo proyecto -->
+        <form action="/index.php?action=crearProyecto" method="POST">
+            <input type="hidden" name="action" value="crearProyecto">
+            
             <div class="form-group">
-                <label for="project-name">Nombre del Proyecto</label>
-                <input type="text" id="project-name" name="project-name" required placeholder="Nombre del proyecto">
+                <label for="nombre">Nombre del Proyecto</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Introduce el nombre del proyecto" required>
             </div>
 
             <div class="form-group">
-                <label for="project-description">Descripción del Proyecto</label>
-                <textarea id="project-description" name="project-description" required placeholder="Descripción detallada del proyecto"></textarea>
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" placeholder="Introduce la descripción del proyecto" required></textarea>
             </div>
 
-            <div class="form-group">
-                <label for="start-date">Fecha de Inicio</label>
-                <input type="date" id="start-date" name="start-date" required>
-            </div>
-
-            <div class="form-group">
-                <label for="end-date">Fecha Estimada de Finalización</label>
-                <input type="date" id="end-date" name="end-date" required>
-            </div>
-
-            <div class="form-group">
-                <label for="project-status">Estado del Proyecto</label>
-                <select id="project-status" name="project-status" required>
-                    <option value="pendiente">Pendiente</option>
-                    <option value="en-progreso">En Progreso</option>
-                    <option value="completado">Completado</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="project-members">Miembros del Proyecto (separados por comas)</label>
-                <input type="text" id="project-members" name="project-members" required placeholder="Ej: Juan Pérez, Ana Gómez">
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn-submit">Crear Proyecto</button>
-            </div>
+            <button type="submit" class="btn-crear-proyecto">Crear Proyecto</button>
         </form>
+
+        <!-- Enlace para volver al dashboard -->
+        <div class="back-link">
+            <a href="/index.php?action=dashboard">Volver al dashboard</a>
+        </div>
     </div>
 </body>
 </html>
