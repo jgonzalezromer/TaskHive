@@ -15,7 +15,7 @@ class Auth {
      */
     public function iniciarSesion($username, $password) {
         // Configuración del servidor LDAP de Windows Server
-        $ldap_host = "ldap://192.168.8.120l"; // Host del servidor LDAP
+        $ldap_host = "ldap://192.168.8.120"; // Host del servidor LDAP
         $ldap_port = 389; // Puerto LDAP
         $ldap_dn = "DC=dominio,DC=local"; // DN base para búsquedas
         $ldap_user = "$username@dominio.local"; // Formato de usuario para Windows Server
