@@ -15,7 +15,7 @@ class Auth {
      */
     public function iniciarSesion($username, $password) {
         // Configuración del servidor LDAP de Windows Server
-        $ldap_host = "ldap://dominio.local"; // Host del servidor LDAP
+        $ldap_host = "ldap://192.168.8.120l"; // Host del servidor LDAP
         $ldap_port = 389; // Puerto LDAP
         $ldap_dn = "DC=dominio,DC=local"; // DN base para búsquedas
         $ldap_user = "$username@dominio.local"; // Formato de usuario para Windows Server
@@ -60,15 +60,57 @@ class Auth {
      * Registra un nuevo usuario en la base de datos.
      */
     public function registrarUsuario($nombre, $email, $password) {
-        // Almacena la contraseña en texto plano (no recomendado en producción)
-        $query = "INSERT INTO usuario (nombre, email, password) VALUES (:nombre, :email, :password)";
-        $stmt = $this->db->prepare($query);
+        // Configuración del servidor LDAP
+        $ldap_host = "ldap://192.168.8.120"; // Host del servidor LDAP
+        $ldap_port = 389; // Puerto LDAP
+        $ldap_dn = "DC=dominio,DC=local"; // DN base para búsquedas
+        $ldap_admin_user = "cn=admin,dc=dominio,dc=local"; // Usuario administrador de LDAP
+        $ldap_admin_password = "Adminpassword123"; // Contraseña del administrador
 
-        $stmt->bindParam(':nombre', $nombre);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $password);
+        // Datos del nuevo usuario
+        $new_user_cn = "$nombre"; // Nombre completo del usuario
+        $new_user_dn = "CN=$new_user_cn,CN=Users,$ldap_dn"; // DN del nuevo usuario
 
-        return $stmt->execute();
+        // Atributos del nuevo usuario
+        $new_user_attributes = [
+            "objectClass" => ["top", "person", "organizationalPerson", "user"], // Clases de objeto
+            "cn" => $new_user_cn, // Nombre completo
+            "sAMAccountName" => $nombre, // Nombre de usuario
+            "userPrincipalName" => "$nombre@dominio.local", // UPN
+            "displayName" => $new_user_cn, // Nombre para mostrar
+            "givenName" => $nombre, // Nombre
+            "mail" => $email, // Correo electrónico
+            "userPassword" => $password, // Contraseña
+            "accountExpires" => "0", // La cuenta no expira
+            "userAccountControl" => "512" // Cuenta habilitada
+        ];
+
+        // Conectar al servidor LDAP
+        $ldap_conn = ldap_connect($ldap_host, $ldap_port);
+        if (!$ldap_conn) {
+            throw new Exception("No se pudo conectar al servidor LDAP.");
+        }
+
+        // Configurar opciones de LDAP
+        ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, 3);
+        ldap_set_option($ldap_conn, LDAP_OPT_REFERRALS, 0);
+
+        // Autenticar como administrador
+        $bind = @ldap_bind($ldap_conn, $ldap_admin_user, $ldap_admin_password);
+        if (!$bind) {
+            throw new Exception("Error de autenticación del administrador.");
+        }
+
+        // Registrar el nuevo usuario
+        $result = @ldap_add($ldap_conn, $new_user_dn, $new_user_attributes);
+        if (!$result) {
+            throw new Exception("Error al registrar el usuario: " . ldap_error($ldap_conn));
+        }
+
+        // Cerrar la conexión LDAP
+        ldap_unbind($ldap_conn);
+
+        return true; // Usuario registrado correctamente
     }
 
     /**
@@ -76,11 +118,11 @@ class Auth {
      */
     public function emailExiste($email) {
         // Configuración del servidor LDAP de Windows Server
-        $ldap_host = "ldap://dominio.local"; // Host del servidor LDAP
+        $ldap_host = "ldap://192.168.8.120l"; // Host del servidor LDAP
         $ldap_port = 389; // Puerto LDAP
         $ldap_dn = "DC=dominio,DC=local"; // DN base para búsquedas
         $ldap_admin_user = "cn=admin,dc=dominio,dc=local"; // Usuario administrador de LDAP
-        $ldap_admin_password = "adminpassword"; // Contraseña del administrador
+        $ldap_admin_password = "Adminpassword123"; // Contraseña del administrador
 
         // Conexión al servidor LDAP
         $ldap_conn = ldap_connect($ldap_host, $ldap_port);
